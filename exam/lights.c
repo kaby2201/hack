@@ -1,3 +1,8 @@
+// & - Bitwise AND
+// | - Bitwise OR
+// ~ - Bitwise NOT
+// ^ - Bitwise XOR
+
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
