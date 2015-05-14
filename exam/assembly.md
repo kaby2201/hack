@@ -1,7 +1,6 @@
 #Init Assembly!
 ```python
 
-	.dseg
 	.equ F_osc = 4000000 #klokkefrekvens
 	.equ tick = F_osc/1024 #klokkefrekvens med prescalar
 
@@ -83,27 +82,29 @@
 	.dseg
 	.org 0x100
 
-	sekunder: byte 1 ;0-59
-	minutter: byte 1 ; 0-99
+	sekunder: .byte 1 ;0-59
+	minutter: .byte 1 ; 0-99
 
 	.cseg
+	.org 0x00
+	rjmp init
+	#mellomrom fra 0 og 46 finnes interrupt vektors
+	.org 0x46 #her kan koden starte, viktig!
 	init:
 
 #init porter
-
-	clr tmp
-	out PORTA, tmp #clear PORTA, B, og C
-	out PORTC, tmp
-	out PORTD, tmp
-	out DDRA, tmp #setter PORTA som input
-
 	ldi tmp, 0xFF #setter PORTC, og PORTD som output
 	out DDRC, tmp 
 	out DDRD, tmp
 
+	clr tmp
+	out DDRA, tmp #setter PORTA som input
+	out PORTA, tmp #clear PORTA, B, og C
+	out PORTC, tmp
+	out PORTD, tmp
+
 #init stack
 
-	clr tmp
 	ldi tmp, low(ramend)
 	out spl, tmp
 	ldi tmp, high(ramend)
