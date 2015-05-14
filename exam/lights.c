@@ -8,11 +8,11 @@ static void flash(void)
 
 static void initPort(void)
 {
-	DDRA = 0xFF;
-	DDRB = 0xFF;
+	DDRA = 0xFF; // Init PORTA as output
+	DDRB = 0xFF; // Init PORTB as output
 	PORTA = 0x0;
 	PORTB = 0x0;
-	DDRC = ~0x01;
+	DDRC = ~0x01; // Init PORTC as output, bit 0 is input
 	PORTC = 0x00;
 }
 
@@ -20,17 +20,17 @@ static void initTimers(void)
 {
 	//Timer 1
 	TCNT1 = 0x0;
-	TCCR1B = (1 << CS10)|(1 << CS11)|(1 << WGM12);
+	TCCR1B = (1 << CS10)|(1 << CS11)|(1 << WGM12); // Prescaler 64 in control register for timer 1, WGM12: Set CTC (Clear timer on compare match)
 	OCR1A = tickA;
-	TIMSK = (1 << OCIE1A);
+	TIMSK = (1 << OCIE1A); // Set timer to interrupt when timer matches tickA (62500)
 
 	//Timer 2
 	TCNT3 = 0x0;
-	TCCR3B = (1 << CS10)|(1 << CS11)|(1 << WGM12);
+	TCCR3B = (1 << CS10)|(1 << CS11)|(1 << WGM12); // Prescaler 64 in control register for timer 2
 	OCR3A = tickB;
 	ETIMSK = (1 << OCR3A);
 
-	sei();
+	sei(); // Enable global interrupts
 }
 
 ISR(TIMER1_COMPA_vect)
