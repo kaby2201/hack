@@ -4,6 +4,11 @@
 #define F_CPU 4000000
 #define tick = F_CPU/64
 
+type_tid sw = {0,0}; //allokerer plass til allokeringen trenger 2 bytes, de settes til 0
+type_tid* tider_p[256]; //lager en array som allokerer 510 bytes (adresseområde) - 0 området tells ikke her ergo 256
+uint8_t trykk = 0;
+uint8_t antallTider = 0;
+
 static void initTimer(void)
 {
 	OCR1A = tick; //output compare med tick
@@ -18,18 +23,12 @@ static void initPort(void)
 	DDRD = ~0x04; //setter PORTD bit 4 til inngang (0)
 }
 
-type_tid sw{0,0}; //allokerer plass til allokeringen trenger 2 bytes, de settes til 0
-type_tid save; //allokerer plass til struct type_tid med navn save (struct allokering trenger n bytes)
-type_tid* tider_p[256]; //lager en array som allokerer 510 bytes (adresseområde) - 0 området tells ikke her ergo 256
-uint8_t trykk = 0;
-uint8_t antallTider = 0;
-
 ISR(TIMER1_COMPA_vector)
 {
 	incTid(&sw); //& finner adresse til sw (stopwatch) og caller incTid med den adressen til sw
 }
 
-static void inc(type_tid* tid_p) //inc tid tar imot en peker av type_tid og i sin scope refferer til den som navnet: tid_p
+static void incTid(type_tid* tid_p) //inc tid tar imot en peker av type_tid og i sin scope refferer til den som navnet: tid_p
 {
 	if (tid_p->sekunder < 59) //sekunder skal økes til den er 58
 		tid_p->sekunder++;
@@ -67,6 +66,6 @@ static int main(void)
 			else
 				trykk = 0;
 		}
-		return 0;
 	}
+	return 0;
 }
