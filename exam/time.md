@@ -64,7 +64,8 @@ static int main(void)
 			if(!trykk) //hvis trykk variabelen == 0
 			{
 				type_tid* nyTid = (type_tid*)malloc(sizeof(type_tid)); 
-				//caster type (type_tid*), malloc reserverer minne samme størrelse som type_tid
+				//caster type (type_tid*), malloc reserverer minne med
+				//samme størrelse som type_tid
 				nyTid->sekunder = sw.sekunder; //lagrer fra sw sekunder til nyTid sekunder
 				nyTid->minutter = sw.minutter; //lagrer fra sw minutter til nyTid minutter
 				tider_p[antallTider++]=nyTid; //lagrer nyTid var. til antallTider array
