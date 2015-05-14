@@ -24,13 +24,15 @@ static void initTimers(void)
 {
 	//Timer 1
 	TCNT1 = 0x0;
-	TCCR1B = (1 << CS10)|(1 << CS11)|(1 << WGM12); // Prescaler 64 in control register for timer 1, WGM12: Set CTC (Clear timer on compare match)
+	TCCR1B = (1 << CS10)|(1 << CS11)|(1 << WGM12); 
+	// Prescaler 64 in control register for timer 1, WGM12: Set CTC (Clear timer on compare match)
 	OCR1A = tickA;
 	TIMSK = (1 << OCIE1A); // Set timer to interrupt when timer matches tickA (62500)
 
 	//Timer 2
 	TCNT3 = 0x0;
-	TCCR3B = (1 << CS10)|(1 << CS11)|(1 << WGM12); // Prescaler 64 in control register for timer 2
+	TCCR3B = (1 << CS10)|(1 << CS11)|(1 << WGM12); 
+	// Prescaler 64 in control register for timer 2
 	OCR3A = tickB;
 	ETIMSK = (1 << OCR3A);
 
