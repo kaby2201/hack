@@ -1,42 +1,47 @@
 #Proxy
 
-Brukes som minnebuffer, feks når noe kan mellomlagres for å spare båndbredde.
+A kind of memory buffer, saves bandwidth by saving things in a cache.
 
+*HashMap is a list of unique elements*
 ```java
-
-public class proxy {
-	
 	private HashMap<String,Image> p = new HashMap<String,Image>();
-	//HashMap inneholder unike elementer
-	public void downloadImage(String url){
-		URL realurl;
+```
+
+*Downloading an image from the Internet*
+```java
+	public void downloadImage(String url) {
+	// Use a try/catch in case the URL is invalid
 		try {
-		//sorroud with try catch; siden url kan være ugyldig, gi feil
 			realurl = new URL(url);
+
+			// Read an image from the URL
 			Image img = ImageIO.read(realurl); 
-			//leser bilde fra url
+
+			// Put the image in the list
 			p.put(url, img); 
-			//kartlegger bilde til url i hashmap
+
 			getImage(url); 
-			//henter bilde fra url
 		} catch (MalformedURLException e) {
+			// Runs if the URL is invalid
 			e.printStackTrace();
 		} catch (IOException e) {
+			// Runs on an I/O error (error connecting to the Internet)
 			e.printStackTrace();
 		}
 	}
-		
-	public Image getImage(String url){
-		if(p.containsKey(url)==false){ 
-		//buffer check, sjekker om bilde i hashmap
-			downloadImage(url); 
-			//hvis ikke i hashmap, last ned
-		}
-		Image img = this.p.get(url); 
-		//hvis url hentet tidligere
-		return img; 
-		//returner bilde
-	}
-}
+```
 
+*Use a buffer to save bandwith, check if the image is already in the HashMap*
+```java
+	public Image getImage(String url){
+
+		// Check if the image is already in the HashMap, download and add if not 
+		if(p.containsKey(url) == false) { 
+			downloadImage(url);
+		}
+
+		// Get image from HashMap, return it
+		Image img = this.p.get(url);
+		return img; 
+	}
 ```
