@@ -115,25 +115,25 @@ A kind of memory buffer, saves bandwidth by saving things in a cache.
 
 Sets are lists that only have unique elements
 
-*HashSet*
+*HashSet*  
 Elements are unique
 ```java
     HashSet<Integer> s = new HashSet<Integer>();
 ```
 
-*TreeSet*
+*TreeSet*  
 Elements are unique and sorted automatically
 ```java
     TreeSet<Integer> s = new TreeSet<Integer>();
 ```
 
-*LinkedHashSet*
+*LinkedHashSet*  
 Elements are unique and sorted in the same order they were added
 ```java
     LinkedHashSet<Integer> s = new LinkedHashSet<Integer>();
 ```
 
-*HashMap*
+*HashMap*  
 A list that has a key and a corresponding value (like a dictionary in Python)
 ```java
     HashMap<String, String> h = new HashMap<String, String>();
