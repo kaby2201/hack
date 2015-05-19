@@ -46,7 +46,6 @@ class, then both the classname as well as the method name must be used to make t
 14. The modulus operator (%) in Java can be used only with variables of integer type.  
 **False**, The modulus operator (%) may be used with floating-point as well as integer types. It returns the remainder of a division operation, e.g., 10 % 6 will return 4.
 
-
 15. Objects of a subclass can be assigned to a super class reference.  
 **True**, Objects of a super class may not be assigned to a sub class reference. Food for thought: why is it so?
 
@@ -65,5 +64,37 @@ class, then both the classname as well as the method name must be used to make t
 20. Whenever the "&&" operator is used, such as in: exp1 && exp2 where exp1 and exp2 are boolean expressions, both the boolean expressions are not always evaluated.  
 **True**, If the first expression is false, the result of the "&&" operation will always be false regardless of the second expression. The "&" operator on the other hand forces the evaluation of the second expression even if the first expression is false.
 
-21. The operations y >> 3 and y >>> 3 produce the same result when y > 0.  
-**True**, The shift operation "y1 >>> y2" is identical to "y1 >> y2" for all positive values of y1. It shifts the bits in y1 to the right by y2 positions.
+#Fra Fronter Quiz
+```java
+Spørsmål 1. While-løkke
+Hvor lenge kjørere følgende kode:
+boolean sant = true;
+while(sant){
+   String svar = JOptionPane.showInputDialog(null,"Skriv noe");
+   if(!svar.equals("mer")){
+      sant = false;
+	  }
+}
+*Så lenge brukeren skriver teksten mer*
+
+Spørsmål 2. Funksjoner
+Følgende kode er feil. Hvordan ville du fikset den?
+public void kmTilMeter(int km){
+    int meter = km*1000;
+    return meter;
+}
+*Funksjonen returnerer nå void. Den burde returnert int.*
+*Funksjoner som returnerer void kan ikke returnere noe. return meter må fjenes*
+
+Spørsmål 3. Exceptions
+Hvordan er det mulig å gjøre slik at følgende kode ikke vil feile selv når 
+brukeren skriver inn noe som ikke er et tall:
+String tekst = JOptionPane.showInputDialog(null,"Skriv et tall");
+int tall = Integer.parseInt(tekst);
+*Sette inn en try-catch rundt andre linjen*
+
+Spørsmål 4. Arv
+Hva er riktig å si om et java interface.
+*Et interface inneholder (bare) regler. 
+En klasse som bruker interfacet må følge disse reglene.*
+```
